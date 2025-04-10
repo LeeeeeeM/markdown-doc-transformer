@@ -4,13 +4,11 @@ identity:
   label:
     en_US: markdown-doc-transformer
     zh_Hans: markdown-doc-transformer
-    pt_BR: markdown-doc-transformer
 description:
   human:
-    en_US: markdown &amp; docs transformer
-    zh_Hans: markdown &amp; docs transformer
-    pt_BR: markdown &amp; docs transformer
-  llm: markdown &amp; docs transformer
+    en_US: markdown-docs transformer
+    zh_Hans: MD 文档转换器
+  llm: markdown-docs transformer
 parameters:
   # - name: query
   #   type: string

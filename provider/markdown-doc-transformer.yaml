@@ -6,9 +6,9 @@ identity:
     zh_Hans: markdown-doc-transformer
     pt_BR: markdown-doc-transformer
   description:
-    en_US: markdown &amp; docs transformer
-    zh_Hans: markdown &amp; docs transformer
-    pt_BR: markdown &amp; docs transformer
+    en_US: markdown-docs transformer
+    zh_Hans: MD 文档转换器
+    pt_BR: markdown-docs transformer
   icon: icon.svg
 tools:
   - tools/markdown-doc-transformer.yaml

@@ -7,6 +7,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from markitdown import MarkItDown
+from urllib.request import urlopen
 import pypandoc
 
 class MarkdownDocTransformerTool(Tool):
@@ -25,18 +26,15 @@ class MarkdownDocTransformerTool(Tool):
 
         results = []
         json_results = []
-        print(f"here ---------------------, {files}")
+
         # Process each file
         for file in files:
             try:
                 file_extension = file.extension if file.extension else '.tmp'
 
-                print(f"here ---------------------")
-                
                 with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
-                    print(f"here inner ---------------------")
-                    print(f"here inner --------------------- {file.blob}")
-                    temp_file.write(file.blob)
+                    blob = urlopen(file.url).read()
+                    temp_file.write(blob)
                     temp_file_path = temp_file.name
                 
                 try:
