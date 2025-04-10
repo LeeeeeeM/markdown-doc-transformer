@@ -1,0 +1,40 @@
+identity:
+  name: markdown-doc-transformer
+  author: goodwood
+  label:
+    en_US: markdown-doc-transformer
+    zh_Hans: markdown-doc-transformer
+    pt_BR: markdown-doc-transformer
+description:
+  human:
+    en_US: markdown &amp; docs transformer
+    zh_Hans: markdown &amp; docs transformer
+    pt_BR: markdown &amp; docs transformer
+  llm: markdown &amp; docs transformer
+parameters:
+  # - name: query
+  #   type: string
+  #   required: true
+  #   label:
+  #     en_US: Query string
+  #     zh_Hans: 查询语句
+  #     pt_BR: Query string
+  #   human_description:
+  #     en_US: markdown &amp; docs transformer
+  #     zh_Hans: markdown &amp; docs transformer
+  #     pt_BR: markdown &amp; docs transformer
+  #   llm_description: markdown &amp; docs transformer
+  #   form: llm
+  - name: files
+    type: files
+    required: false 
+    label:
+      en_US: Files
+      zh_Hans: 文件
+    human_description:
+      en_US: Upload files for processing
+      zh_Hans: 上传文件进行处理
+    form: llm
+extra:
+  python:
+    source: tools/markdown-doc-transformer.py

@@ -1,0 +1,17 @@
+identity:
+  author: goodwood
+  name: markdown-doc-transformer
+  label:
+    en_US: markdown-doc-transformer
+    zh_Hans: markdown-doc-transformer
+    pt_BR: markdown-doc-transformer
+  description:
+    en_US: markdown &amp; docs transformer
+    zh_Hans: markdown &amp; docs transformer
+    pt_BR: markdown &amp; docs transformer
+  icon: icon.svg
+tools:
+  - tools/markdown-doc-transformer.yaml
+extra:
+  python:
+    source: provider/markdown-doc-transformer.py

@@ -1,0 +1,42 @@
+version: 0.0.1
+type: plugin
+author: goodwood
+name: markdown-doc-transformer
+label:
+  en_US: markdown-doc-transformer
+  ja_JP: markdown-doc-transformer
+  zh_Hans: markdown-doc-transformer
+  pt_BR: markdown-doc-transformer
+description:
+  en_US: markdown & docs transformer
+  ja_JP: markdown & docs transformer
+  zh_Hans: markdown & docs transformer
+  pt_BR: markdown & docs transformer
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/markdown-doc-transformer.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-04-10T10:59:54.017828+08:00
+privacy: PRIVACY.md
+verified: false
