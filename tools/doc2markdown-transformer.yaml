@@ -1,0 +1,26 @@
+identity:
+  name: doc2markdown
+  author: goodwood
+  label:
+    en_US: doc2markdown
+    zh_Hans: doc 转换 markdown
+description:
+  human:
+    en_US: doc2markdown
+    zh_Hans: word 文档 转换 markdown 文本
+  llm: doc2markdown transformer
+parameters:
+  - name: files
+    type: files
+    required: false 
+    label:
+      en_US: word Files
+      zh_Hans: word 文件
+    human_description:
+      en_US: Upload word files for processing
+      zh_Hans: 上传 word 文件进行处理
+    form: llm
+
+extra:
+  python:
+    source: tools/doc2markdown-transformer.py

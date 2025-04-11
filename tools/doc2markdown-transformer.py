@@ -6,7 +6,6 @@ import os
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-# from markitdown import MarkItDown
 from urllib.request import urlopen
 import pypandoc
 
@@ -18,62 +17,20 @@ except OSError:
 
 class MarkdownDocTransformerTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
-        # files = tool_parameters.get("files", [])
-        markdown = tool_parameters.get("markdown", "")
+        files = tool_parameters.get("files", [])
         
         # Handle empty files array
-        if not markdown:
-            yield self.create_text_message("No markdown provided")
+        if not files:
+            yield self.create_text_message("No files provided")
             yield self.create_json_message({
                 "status": "error",
-                "message": "No markdown provided",
+                "message": "No files provided",
                 "results": []
             })
             return
 
+        results = []
         json_results = []
-
-        try:
-            with tempfile.NamedTemporaryFile(delete=False, suffix="docx") as temp_file:
-                temp_file_path = temp_file.name
-            try:
-                pypandoc.convert_text(
-                    markdown,                # 输入文本
-                    to="docx",           # 输出格式
-                    format="markdown",   # 输入文本的格式（Markdown）
-                    outputfile=temp_file_path,  # 输出文件路径
-                    encoding="utf-8"     # 编码
-                )
-
-                with open(temp_file_path, 'rb') as file_t:
-                    docx_blob = file_t.read()
-                
-                # Create blob message for backward compatibility
-                yield self.create_blob_message(
-                    docx_blob,
-                    meta={
-                        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    },
-                )
-            finally:
-                    if os.path.exists(temp_file_path):
-                        os.unlink(temp_file_path)
-
-            yield self.create_text_message(markdown)
-        except Exception as e:
-                error_msg = f"Error processing markdown {markdown}: {str(e)}"
-                yield self.create_text_message(text=error_msg)
-                json_results.append({
-                    "error": error_msg,
-                    "status": "error"
-                })
-        # Create JSON response
-        json_response = {
-            "results": json_results
-        }
-        yield self.create_json_message(json_response)
-
-        return
 
         # Process each file
         for file in files:
@@ -86,40 +43,33 @@ class MarkdownDocTransformerTool(Tool):
                     temp_file_path = temp_file.name
                 
                 try:
-                    md = MarkItDown()
-                    result = md.convert(temp_file_path)
-                    print(f"{result}")
-
-                    pypandoc.convert_text(
-                        markdown,                # 输入文本
-                        to="docx",           # 输出格式
-                        format="markdown",   # 输入文本的格式（Markdown）
-                        outputfile=temp_file_path,  # 输出文件路径
-                        encoding="utf-8"     # 编码
+                    result = pypandoc.convert_file(
+                        temp_file_path,                # 输入文本
+                        "markdown",         # 输出格式
+                        format= file_extension[1:] if file.extension else 'docx'  # 输入格式为 docx, 后续做兼容判断 ext
                     )
 
-                    with open(temp_file_path, 'rb') as file_t:
-                        docx_blob = file_t.read()
+                    result = result.strip()
                     
                     # Create blob message for backward compatibility
                     yield self.create_blob_message(
-                        docx_blob,
+                        result,
                         meta={
-                            "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            "mime_type": "text/markdown",
                         },
                     )
                     
-                    if result and hasattr(result, 'text_content'):
+                    if result:
                         results.append({
                             "filename": file.filename,
-                            "content": result.text_content
+                            "content": result
                         })
                         
                         # Add to JSON results
                         json_results.append({
                             "filename": file.filename,
                             "original_format": file_extension.lstrip('.'),
-                            "markdown_content": result.text_content,
+                            "markdown_content": result,
                             "status": "success"
                         })
                     else:

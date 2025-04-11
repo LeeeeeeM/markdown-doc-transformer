@@ -1,0 +1,25 @@
+identity:
+  name: markdown2doc
+  author: goodwood
+  label:
+    en_US: markdown2doc
+    zh_Hans: markdown 转换 doc
+description:
+  human:
+    en_US: markdown2docs
+    zh_Hans: markdown 文本 转换 word 文档
+  llm: markdown-docs transformer
+parameters:
+  - name: markdown
+    type: string
+    required: true 
+    label:
+      en_US: Markdown
+      zh_Hans: 字符串
+    human_description:
+      en_US: Markdown String
+      zh_Hans: 字符串
+    form: llm
+extra:
+  python:
+    source: tools/markdown2doc-transformer.py
