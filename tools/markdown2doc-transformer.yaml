@@ -3,7 +3,7 @@ identity:
   author: goodwood
   label:
     en_US: markdown2doc
-    zh_Hans: markdown 转换 doc -- LOCAL
+    zh_Hans: markdown 转换 doc
 description:
   human:
     en_US: markdown2docs
