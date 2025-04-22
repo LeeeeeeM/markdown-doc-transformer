@@ -3,7 +3,7 @@ identity:
   author: goodwood
   label:
     en_US: markdown2doc
-    zh_Hans: markdown 转换 doc
+    zh_Hans: markdown 转换 doc -- LOCAL
 description:
   human:
     en_US: markdown2docs
@@ -14,11 +14,51 @@ parameters:
     type: string
     required: true 
     label:
-      en_US: Markdown
-      zh_Hans: 字符串
+      en_US: Markdown Content
+      zh_Hans: Markdown 内容
     human_description:
       en_US: Markdown String
-      zh_Hans: 字符串
+      zh_Hans: Markdown 字符串
+    form: llm
+  - name: file_api
+    type: string
+    required: false 
+    label:
+      en_US: api for generate image blob
+      zh_Hans: 生成图片 blob 的接口
+    human_description:
+      en_US: api for generate image blob using echarts
+      zh_Hans: 用于处理 markdown 内的 echarts，生成图片 blob
+    form: llm
+  - name: image_width
+    type: number
+    required: false 
+    label:
+      en_US: Width of images
+      zh_Hans: Markdown 内图片宽度
+    human_description:
+      en_US: Image Width, default is 800
+      zh_Hans: 图片宽度，默认为 800
+    form: llm
+  - name: image_height
+    type: number
+    required: false 
+    label:
+      en_US: Height of images
+      zh_Hans: Markdown 内图片高度
+    human_description:
+      en_US: Image Height, default is 500
+      zh_Hans: 图片高度，默认为 500
+    form: llm
+  - name: reference_docx
+    type: file
+    required: false 
+    label:
+      en_US: docx template
+      zh_Hans: docx 模板
+    human_description:
+      en_US: docx template
+      zh_Hans: 用于生成的 docx 模板
     form: llm
 extra:
   python:
