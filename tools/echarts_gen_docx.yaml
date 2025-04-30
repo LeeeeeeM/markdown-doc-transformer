@@ -1,0 +1,46 @@
+identity:
+  name: echarts_gen_docx
+  author: goodwood
+  label:
+    en_US: echarts_gen_docx
+    zh_Hans: echarts & gen func 生成 docx
+description:
+  human:
+    en_US: echarts_gen_docx
+    zh_Hans: echarts & gen func 生成 docx
+  llm: echarts2docx generator
+parameters:
+  - name: file_api
+    type: string
+    required: false 
+    label:
+      en_US: api for generate docx blob
+      zh_Hans: 生成docx blob 的接口
+    human_description:
+      en_US: api for generate docx blob using echarts
+      zh_Hans: 用于通过 echarts 和 func 生成 docx blob
+    form: llm
+  - name: images
+    type: string
+    required: true 
+    label:
+      en_US: eharts options list
+      zh_Hans: echarts 图片配置数组字符串
+    human_description:
+      en_US: eharts options list, default is "[]"
+      zh_Hans: echarts 图片配置数组字符串，默认为 "[]"
+    form: llm
+  - name: func
+    type: string
+    required: true 
+    label:
+      en_US: func code impl
+      zh_Hans: 生成 docx 代码
+    human_description:
+      en_US: func code, default is ""
+      zh_Hans: 生成代码，默认为 ""
+    form: llm
+
+extra:
+  python:
+    source: tools/echarts_gen_docx.py

@@ -13,6 +13,7 @@ identity:
 tools:
   - tools/markdown2doc-transformer.yaml
   - tools/doc2markdown-transformer.yaml
+  - tools/echarts_gen_docx.yaml
 extra:
   python:
     source: provider/markdown-doc-transformer.py
