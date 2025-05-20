@@ -53,7 +53,19 @@ class EchartsGenDocx(Tool):
           }
           response = requests.post(file_api, headers=headers, data=json.dumps(data))
           if response.status_code != 200:
-            raise Exception(f"Server error {response.reason}")
+            try:
+                json_data = response.json()
+                error_msg = f"Error processing file : {json_data["message"]}"
+                code = json_data["code"]
+                yield self.create_text_message(text=error_msg)
+                yield self.create_json_message({
+                    "status": "文档生成失败",
+                    "message": error_msg,
+                    "code": code
+                })
+                return
+            except ValueError:
+                raise Exception(f"Server error {response.reason}")
           
           # 直接获取二进制响应内容
           image_data = response.content

@@ -1,4 +1,4 @@
-version: 0.0.5
+version: 0.0.6
 type: plugin
 author: goodwood
 name: markdown-doc-transformer
@@ -29,7 +29,7 @@ plugins:
   tools:
     - provider/markdown-doc-transformer.yaml
 meta:
-  version: 0.0.5
+  version: 0.0.6
   arch:
     - amd64
     - arm64
